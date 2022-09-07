@@ -8,7 +8,7 @@ def getYearlyReturn(file):
     result = {}
 
     #The file is read and formatted in such a way that only the Date, Closing and Opening prices are considered in the pandas dataframe.
-    file = p.read_csv("Q5\Src\%s.csv" % file)
+    file = p.read_csv("%s.csv" % file)
     file["Date"] = p.to_datetime(file["Date"])
     file = p.DataFrame().assign(Date=file["Date"], Open=file["Open"], Close=file["Close"])
 
@@ -27,7 +27,7 @@ def getYearlyReturn(file):
 #This function calculates the Risk-Free Rate of return weighed against a government bond in particular the 10Y G-Sec Yield Rate of India.
 def calculateRiskFreeReturn(gbond):
     #The file is opened and the data is formatted according to the year with the yield rate in the months of that year
-    yieldrate = p.read_csv("Q5\Src\%s.csv" % gbond)
+    yieldrate = p.read_csv("%s.csv" % gbond)
     yieldrate = p.DataFrame().assign(Date = yieldrate["Date"], Yield = yieldrate["Price"])
     yieldrate["Date"] = yieldrate["Date"].transform(lambda x: "20"+x.split(" ")[1])
     result = {}
